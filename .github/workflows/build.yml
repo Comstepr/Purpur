@@ -30,3 +30,9 @@ jobs:
           ./gradlew clean cleanCache
           ./gradlew applyPatches --no-daemon --stacktrace 
           ./gradlew build --no-daemon --stacktrace
+          ./gradlew createReobfPaperclipJar --no-daemon --stacktrace
+      - name: Upload Jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: purpur-cogan-edit
+          path: build/libs/purpur-paperclip-*-reobf.jar
