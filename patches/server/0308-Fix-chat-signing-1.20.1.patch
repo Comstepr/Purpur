@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: BuildTools <unconfigured@null.spigotmc.org>
-Date: Fri, 29 Sep 2023 14:28:16 +0800
-Subject: [PATCH] Fix chat signing
+Date: Fri, 29 Sep 2023 15:05:07 +0800
+Subject: [PATCH] Fix chat signing (1.20.1)
 
 
 diff --git a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
-index c0a80824a0307ea673805015119cc834b268f0dc..7cc5573f24be9cdd540111b30eeb4e9d8c0c1289 100644
+index c0a80824a0307ea673805015119cc834b268f0dc..8ddb1e61237145084f52b74c4419b9cb6b7a8ffa 100644
 --- a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
 +++ b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
-@@ -38,15 +38,6 @@ public class SignedMessageChain {
+@@ -38,15 +38,7 @@ public class SignedMessageChain {
                  throw new SignedMessageChain.DecodeException(Component.translatable("chat.disabled.expiredProfileKey"), false);
              } else {
                  PlayerChatMessage playerChatMessage = new PlayerChatMessage(signedMessageLink, signature, body, (Component)null, FilterMask.PASS_THROUGH);
@@ -21,6 +21,7 @@ index c0a80824a0307ea673805015119cc834b268f0dc..7cc5573f24be9cdd540111b30eeb4e9d
 -
 -                    return playerChatMessage;
 -                }
++                return playerChatMessage;
              }
          };
      }
