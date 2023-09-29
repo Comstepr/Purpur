@@ -1,0 +1,26 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: BuildTools <unconfigured@null.spigotmc.org>
+Date: Fri, 29 Sep 2023 14:28:16 +0800
+Subject: [PATCH] Fix chat signing
+
+
+diff --git a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
+index c0a80824a0307ea673805015119cc834b268f0dc..7cc5573f24be9cdd540111b30eeb4e9d8c0c1289 100644
+--- a/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
++++ b/src/main/java/net/minecraft/network/chat/SignedMessageChain.java
+@@ -38,15 +38,6 @@ public class SignedMessageChain {
+                 throw new SignedMessageChain.DecodeException(Component.translatable("chat.disabled.expiredProfileKey"), false);
+             } else {
+                 PlayerChatMessage playerChatMessage = new PlayerChatMessage(signedMessageLink, signature, body, (Component)null, FilterMask.PASS_THROUGH);
+-                if (!playerChatMessage.verify(signatureValidator)) {
+-                    throw new SignedMessageChain.DecodeException(Component.translatable("multiplayer.disconnect.unsigned_chat"), true, org.bukkit.event.player.PlayerKickEvent.Cause.UNSIGNED_CHAT); // Paper - kick event causes
+-                } else {
+-                    if (playerChatMessage.hasExpiredServer(Instant.now())) {
+-                        LOGGER.warn("Received expired chat: '{}'. Is the client/server system time unsynchronized?", (Object)body.content());
+-                    }
+-
+-                    return playerChatMessage;
+-                }
+             }
+         };
+     }
